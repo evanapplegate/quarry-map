@@ -1,0 +1,821 @@
+[
+{
+"id": "NEOGENE ROCKS (UNDIFFERENTIATED) - GRAVEL, SAND, SILT AND CLAY",
+"unit": "Neogene Rocks (undifferentiated)",
+"rock": "Gravel, sand, silt and clay",
+"period": "Neogene",
+"color": "#ffdb00"
+},
+{
+"id": "NEOGENE TO QUATERNARY ROCKS (UNDIFFERENTIATED) - GRAVEL, SAND, SILT AND CLAY",
+"unit": "Neogene to Quaternary Rocks (undifferentiated)",
+"rock": "Gravel, sand, silt and clay",
+"period": "Neogene",
+"color": "#dbb000"
+},
+{
+"id": "BRACKLESHAM GROUP AND BARTON GROUP (UNDIFFERENTIATED) - SAND, SILT AND CLAY",
+"unit": "Bracklesham Group and Barton Group (undifferentiated)",
+"rock": "Sand, silt and clay",
+"period": "Palaeogene",
+"color": "#ff9433"
+},
+{
+"id": "EOCENE TO MIOCENE ROCKS (UNDIFFERENTIATED) - CLAY, SILT, SAND AND GRAVEL",
+"unit": "Eocene to Miocene Rocks (undifferentiated)",
+"rock": "Clay, silt, sand and gravel",
+"period": "Palaeogene",
+"color": "#dbdb33"
+},
+{
+"id": "THAMES GROUP - CLAY, SILT, SAND AND GRAVEL",
+"unit": "Thames Group",
+"rock": "Clay, silt, sand and gravel",
+"period": "Palaeogene",
+"color": "#dbc9db"
+},
+{
+"id": "THANET SAND FORMATION - SAND, SILT AND CLAY",
+"unit": "Thanet Sand Formation",
+"rock": "Sand, silt and clay",
+"period": "Palaeogene",
+"color": "#db7554"
+},
+{
+"id": "LAMBETH GROUP - CLAY, SILT, SAND AND GRAVEL",
+"unit": "Lambeth Group",
+"rock": "Clay, silt, sand and gravel",
+"period": "Palaeogene",
+"color": "#ffb054"
+},
+{
+"id": "SOLENT GROUP - CLAY, SILT AND SAND",
+"unit": "Solent Group",
+"rock": "Clay, silt and sand",
+"period": "Palaeogene",
+"color": "#ffb0b0"
+},
+{
+"id": "UNNAMED IGNEOUS INTRUSION, PALAEOGENE - FELSIC-ROCK",
+"unit": "Unnamed Igneous Intrusion, Palaeogene",
+"rock": "Felsic-rock",
+"period": "Palaeogene",
+"color": "#ff00ff"
+},
+{
+"id": "GREY CHALK SUBGROUP - CHALK",
+"unit": "Grey Chalk Subgroup",
+"rock": "Chalk",
+"period": "Cretaceous",
+"color": "#c9ff00"
+},
+{
+"id": "WHITE CHALK SUBGROUP - CHALK",
+"unit": "White Chalk Subgroup",
+"rock": "Chalk",
+"period": "Cretaceous",
+"color": "#dbff54"
+},
+{
+"id": "GAULT FORMATION AND UPPER GREENSAND FORMATION (UNDIFFERENTIATED) - MUDSTONE, SANDSTONE AND LIMESTONE",
+"unit": "Gault Formation and Upper Greensand Formation (undifferentiated)",
+"rock": "Mudstone, sandstone and limestone",
+"period": "Cretaceous",
+"color": "#00ffb0"
+},
+{
+"id": "LOWER GREENSAND GROUP - SANDSTONE AND MUDSTONE",
+"unit": "Lower Greensand Group",
+"rock": "Sandstone and mudstone",
+"period": "Cretaceous",
+"color": "#c9ffdb"
+},
+{
+"id": "WEALDEN GROUP - MUDSTONE, SILTSTONE AND SANDSTONE",
+"unit": "Wealden Group",
+"rock": "Mudstone, siltstone and sandstone",
+"period": "Cretaceous",
+"color": "#94c900"
+},
+{
+"id": "WEALDEN GROUP - SANDSTONE AND SILTSTONE, INTERBEDDED",
+"unit": "Wealden Group",
+"rock": "Sandstone and siltstone, interbedded",
+"period": "Cretaceous",
+"color": "#c9ed54"
+},
+{
+"id": "PORTLAND GROUP - LIMESTONE AND CALCAREOUS SANDSTONE",
+"unit": "Portland Group",
+"rock": "Limestone and calcareous sandstone",
+"period": "Jurassic",
+"color": "#ffffb0"
+},
+{
+"id": "PURBECK LIMESTONE GROUP - LIMESTONE AND MUDSTONE, INTERBEDDED",
+"unit": "Purbeck Limestone Group",
+"rock": "Limestone and mudstone, interbedded",
+"period": "Jurassic",
+"color": "#c9db33"
+},
+{
+"id": "CORALLIAN GROUP - LIMESTONE, SANDSTONE, SILTSTONE AND MUDSTONE",
+"unit": "Corallian Group",
+"rock": "Limestone, sandstone, siltstone and mudstone",
+"period": "Jurassic",
+"color": "#ffed54"
+},
+{
+"id": "WEST WALTON FORMATION, AMPTHILL CLAY FORMATION AND KIMMERIDGE CLAY FORMATION (UNDIFFERENTIATED) - MU",
+"unit": "West Walton Formation, Ampthill Clay Formation and Kimmeridge Clay Formation (undifferentiated)",
+"rock": "Mudstone, siltstone and sandstone",
+"period": "Jurassic",
+"color": "#edc9db"
+},
+{
+"id": "KELLAWAYS FORMATION AND OXFORD CLAY FORMATION (UNDIFFERENTIATED) - MUDSTONE, SILTSTONE AND SANDSTONE",
+"unit": "Kellaways Formation and Oxford Clay Formation (undifferentiated)",
+"rock": "Mudstone, siltstone and sandstone",
+"period": "Jurassic",
+"color": "#c9b0c9"
+},
+{
+"id": "GREAT OOLITE GROUP - SANDSTONE, LIMESTONE AND ARGILLACEOUS ROCKS",
+"unit": "Great Oolite Group",
+"rock": "Sandstone, limestone and argillaceous rocks",
+"period": "Jurassic",
+"color": "#ffeddb"
+},
+{
+"id": "INFERIOR OOLITE GROUP - LIMESTONE, SANDSTONE, SILTSTONE AND MUDSTONE",
+"unit": "Inferior Oolite Group",
+"rock": "Limestone, sandstone, siltstone and mudstone",
+"period": "Jurassic",
+"color": "#ffedb0"
+},
+{
+"id": "RAVENSCAR GROUP - SANDSTONE, SILTSTONE AND MUDSTONE",
+"unit": "Ravenscar Group",
+"rock": "Sandstone, siltstone and mudstone",
+"period": "Jurassic",
+"color": "#dbb054"
+},
+{
+"id": "LIAS GROUP - MUDSTONE, SILTSTONE, LIMESTONE AND SANDSTONE",
+"unit": "Lias Group",
+"rock": "Mudstone, siltstone, limestone and sandstone",
+"period": "Triassic",
+"color": "#b09494"
+},
+{
+"id": "TRIASSIC ROCKS (UNDIFFERENTIATED) - MUDSTONE, SILTSTONE AND SANDSTONE",
+"unit": "Triassic Rocks (undifferentiated)",
+"rock": "Mudstone, siltstone and sandstone",
+"period": "Triassic",
+"color": "#ff9494"
+},
+{
+"id": "TRIASSIC ROCKS (UNDIFFERENTIATED) - SANDSTONE AND CONGLOMERATE, INTERBEDDED",
+"unit": "Triassic Rocks (undifferentiated)",
+"rock": "Sandstone and conglomerate, interbedded",
+"period": "Triassic",
+"color": "#ffb0c9"
+},
+{
+"id": "ZECHSTEIN GROUP - DOLOMITISED LIMESTONE AND DOLOMITE",
+"unit": "Zechstein Group",
+"rock": "Dolomitised limestone and dolomite",
+"period": "Permian",
+"color": "#b0ffff"
+},
+{
+"id": "PERMIAN ROCKS (UNDIFFERENTIATED) - MUDSTONE, SILTSTONE AND SANDSTONE",
+"unit": "Permian Rocks (undifferentiated)",
+"rock": "Mudstone, siltstone and sandstone",
+"period": "Permian",
+"color": "#edb054"
+},
+{
+"id": "PERMIAN ROCKS (UNDIFFERENTIATED) - SANDSTONE AND CONGLOMERATE, INTERBEDDED",
+"unit": "Permian Rocks (undifferentiated)",
+"rock": "Sandstone and conglomerate, interbedded",
+"period": "Permian",
+"color": "#db7500"
+},
+{
+"id": "UNNAMED EXTRUSIVE ROCKS, PERMIAN - FELSIC LAVA",
+"unit": "Unnamed Extrusive Rocks, Permian",
+"rock": "Felsic lava",
+"period": "Permian",
+"color": "#ffb000"
+},
+{
+"id": "UNNAMED EXTRUSIVE ROCKS, PERMIAN - MAFIC LAVA",
+"unit": "Unnamed Extrusive Rocks, Permian",
+"rock": "Mafic lava",
+"period": "Permian",
+"color": "#ffdbff"
+},
+{
+"id": "PENNINE UPPER COAL MEASURES FORMATION - MUDSTONE, SILTSTONE, SANDSTONE, COAL, IRONSTONE AND FERRICRE",
+"unit": "Pennine Upper Coal Measures Formation",
+"rock": "Mudstone, siltstone, sandstone, coal, ironstone and ferricrete",
+"period": "Carboniferous",
+"color": "#dbdbdb"
+},
+{
+"id": "SOUTH WALES UPPER COAL MEASURES FORMATION - MUDSTONE, SILTSTONE, SANDSTONE, COAL, IRONSTONE AND FERR",
+"unit": "South Wales Upper Coal Measures Formation",
+"rock": "Mudstone, siltstone, sandstone, coal, ironstone and ferricrete",
+"period": "Carboniferous",
+"color": "#edc954"
+},
+{
+"id": "PENNINE MIDDLE COAL MEASURES FORMATION AND SOUTH WALES MIDDLE COAL MEASURES FORMATION (UNDIFFERENTIA",
+"unit": "Pennine Middle Coal Measures Formation and South Wales Middle Coal Measures Formation (undifferentia",
+"rock": "Mudstone, siltstone, sandstone, coal, ironstone and ferricrete",
+"period": "Carboniferous",
+"color": "#c9c9c9"
+},
+{
+"id": "WARWICKSHIRE GROUP - MUDSTONE, SILTSTONE, SANDSTONE, COAL, IRONSTONE AND FERRICRETE",
+"unit": "Warwickshire Group",
+"rock": "Mudstone, siltstone, sandstone, coal, ironstone and ferricrete",
+"period": "Carboniferous",
+"color": "#edc994"
+},
+{
+"id": "WARWICKSHIRE GROUP - SILTSTONE AND SANDSTONE WITH SUBORDINATE MUDSTONE",
+"unit": "Warwickshire Group",
+"rock": "Siltstone and sandstone with subordinate mudstone",
+"period": "Carboniferous",
+"color": "#c9b094"
+},
+{
+"id": "PENNINE COAL MEASURES GROUP - MUDSTONE, SILTSTONE, SANDSTONE, COAL, IRONSTONE AND FERRICRETE",
+"unit": "Pennine Coal Measures Group",
+"rock": "Mudstone, siltstone, sandstone, coal, ironstone and ferricrete",
+"period": "Carboniferous",
+"color": "#949494"
+},
+{
+"id": "PENNINE LOWER COAL MEASURES FORMATION AND SOUTH WALES LOWER COAL MEASURES FORMATION (UNDIFFERENTIATE",
+"unit": "Pennine Lower Coal Measures Formation and South Wales Lower Coal Measures Formation (undifferentiate",
+"rock": "Mudstone, siltstone, sandstone, coal, ironstone and ferricrete",
+"period": "Carboniferous",
+"color": "#949494"
+},
+{
+"id": "HOLSWORTHY GROUP - MUDSTONE, SILTSTONE AND SANDSTONE",
+"unit": "Holsworthy Group",
+"rock": "Mudstone, siltstone and sandstone",
+"period": "Carboniferous",
+"color": "#dbdbb0"
+},
+{
+"id": "MILLSTONE GRIT GROUP [SEE ALSO MIGR] - MUDSTONE, SILTSTONE AND SANDSTONE",
+"unit": "Millstone Grit Group [see Also Migr]",
+"rock": "Mudstone, siltstone and sandstone",
+"period": "Carboniferous",
+"color": "#dbdbb0"
+},
+{
+"id": "YOREDALE GROUP - LIMESTONE WITH SUBORDINATE SANDSTONE AND ARGILLACEOUS ROCKS",
+"unit": "Yoredale Group",
+"rock": "Limestone with subordinate sandstone and argillaceous rocks",
+"period": "Carboniferous",
+"color": "#94ffed"
+},
+{
+"id": "YOREDALE GROUP - LIMESTONE, ARGILLACEOUS ROCKS AND SUBORDINATE SANDSTONE, INTERBEDDED",
+"unit": "Yoredale Group",
+"rock": "Limestone, argillaceous rocks and subordinate sandstone, interbedded",
+"period": "Carboniferous",
+"color": "#dbffed"
+},
+{
+"id": "YOREDALE GROUP - LIMESTONE, SANDSTONE, SILTSTONE AND MUDSTONE",
+"unit": "Yoredale Group",
+"rock": "Limestone, sandstone, siltstone and mudstone",
+"period": "Carboniferous",
+"color": "#dbff75"
+},
+{
+"id": "BORDER GROUP - SANDSTONE WITH SUBORDINATE ARGILLACEOUS ROCKS AND LIMESTONE",
+"unit": "Border Group",
+"rock": "Sandstone with subordinate argillaceous rocks and limestone",
+"period": "Carboniferous",
+"color": "#75ffc9"
+},
+{
+"id": "BOWLAND HIGH GROUP AND CRAVEN GROUP (UNDIFFERENTIATED) - LIMESTONE",
+"unit": "Bowland High Group and Craven Group (undifferentiated)",
+"rock": "Limestone",
+"period": "Carboniferous",
+"color": "#75ffff"
+},
+{
+"id": "BOWLAND HIGH GROUP AND CRAVEN GROUP (UNDIFFERENTIATED) - MUDSTONE, SILTSTONE AND SANDSTONE",
+"unit": "Bowland High Group and Craven Group (undifferentiated)",
+"rock": "Mudstone, siltstone and sandstone",
+"period": "Carboniferous",
+"color": "#edff54"
+},
+{
+"id": "DINANTIAN ROCKS (UNDIFFERENTIATED) - LIMESTONE WITH SUBORDINATE SANDSTONE AND ARGILLACEOUS ROCKS",
+"unit": "Dinantian Rocks (undifferentiated)",
+"rock": "Limestone with subordinate sandstone and argillaceous rocks",
+"period": "Carboniferous",
+"color": "#54ffed"
+},
+{
+"id": "DINANTIAN ROCKS (UNDIFFERENTIATED) - SANDSTONE, LIMESTONE AND ARGILLACEOUS ROCKS",
+"unit": "Dinantian Rocks (undifferentiated)",
+"rock": "Sandstone, limestone and argillaceous rocks",
+"period": "Carboniferous",
+"color": "#33ffdb"
+},
+{
+"id": "INVERCLYDE GROUP - SANDSTONE, SILTSTONE AND MUDSTONE",
+"unit": "Inverclyde Group",
+"rock": "Sandstone, siltstone and mudstone",
+"period": "Carboniferous",
+"color": "#33ffdb"
+},
+{
+"id": "UNNAMED EXTRUSIVE ROCKS, CARBONIFEROUS - MAFIC LAVA",
+"unit": "Unnamed Extrusive Rocks, Carboniferous",
+"rock": "Mafic lava",
+"period": "Carboniferous",
+"color": "#ffdbff"
+},
+{
+"id": "UNNAMED EXTRUSIVE ROCKS, CARBONIFEROUS - MAFIC LAVA AND MAFIC TUFF",
+"unit": "Unnamed Extrusive Rocks, Carboniferous",
+"rock": "Mafic lava and mafic tuff",
+"period": "Carboniferous",
+"color": "#ffdbff"
+},
+{
+"id": "UNNAMED EXTRUSIVE ROCKS, CARBONIFEROUS - MAFIC TUFF",
+"unit": "Unnamed Extrusive Rocks, Carboniferous",
+"rock": "Mafic tuff",
+"period": "Carboniferous",
+"color": "#ffdbff"
+},
+{
+"id": "UNNAMED EXTRUSIVE ROCKS, DINANTIAN - MAFIC LAVA AND MAFIC TUFF",
+"unit": "Unnamed Extrusive Rocks, Dinantian",
+"rock": "Mafic lava and mafic tuff",
+"period": "Carboniferous",
+"color": "#ffdbff"
+},
+{
+"id": "UNNAMED IGNEOUS INTRUSION, CARBONIFEROUS TO PERMIAN - DOLERITE AND THOLEIITIC BASALT",
+"unit": "Unnamed Igneous Intrusion, Carboniferous to Permian",
+"rock": "Dolerite and tholeiitic basalt",
+"period": "Carboniferous",
+"color": "#ff94b0"
+},
+{
+"id": "UNNAMED IGNEOUS INTRUSION, CARBONIFEROUS TO PERMIAN - FELSIC-ROCK",
+"unit": "Unnamed Igneous Intrusion, Carboniferous to Permian",
+"rock": "Felsic-rock",
+"period": "Carboniferous",
+"color": "#ff00db"
+},
+{
+"id": "UNNAMED IGNEOUS INTRUSION, CARBONIFEROUS TO PERMIAN - MAFIC IGNEOUS-ROCK",
+"unit": "Unnamed Igneous Intrusion, Carboniferous to Permian",
+"rock": "Mafic igneous-rock",
+"period": "Carboniferous",
+"color": "#33b054"
+},
+{
+"id": "TEIGN VALLEY GROUP - MUDSTONE, SILTSTONE AND SANDSTONE",
+"unit": "Teign Valley Group",
+"rock": "Mudstone, siltstone and sandstone",
+"period": "Devonian",
+"color": "#b0c9b0"
+},
+{
+"id": "STRATHEDEN GROUP - SANDSTONE AND CONGLOMERATE, INTERBEDDED",
+"unit": "Stratheden Group",
+"rock": "Sandstone and conglomerate, interbedded",
+"period": "Devonian",
+"color": "#ed9494"
+},
+{
+"id": "UPPER DEVONIAN ROCKS (UNDIFFERENTIATED) - BRECCIA AND METABRECCIA",
+"unit": "Upper Devonian Rocks (undifferentiated)",
+"rock": "Breccia and metabreccia",
+"period": "Devonian",
+"color": "#54db94"
+},
+{
+"id": "UPPER DEVONIAN ROCKS (UNDIFFERENTIATED) - MUDSTONE, SILTSTONE AND SANDSTONE",
+"unit": "Upper Devonian Rocks (undifferentiated)",
+"rock": "Mudstone, siltstone and sandstone",
+"period": "Devonian",
+"color": "#edb0b0"
+},
+{
+"id": "UPPER DEVONIAN ROCKS (UNDIFFERENTIATED) - SANDSTONE AND CONGLOMERATE, INTERBEDDED",
+"unit": "Upper Devonian Rocks (undifferentiated)",
+"rock": "Sandstone and conglomerate, interbedded",
+"period": "Devonian",
+"color": "#edc9db"
+},
+{
+"id": "MIDDLE DEVONIAN (UNDIFFERENTIATED) - MUDSTONE, SILTSTONE AND SANDSTONE",
+"unit": "Middle Devonian (undifferentiated)",
+"rock": "Mudstone, siltstone and sandstone",
+"period": "Devonian",
+"color": "#ffc954"
+},
+{
+"id": "MIDDLE DEVONIAN (UNDIFFERENTIATED) - SANDSTONE AND CONGLOMERATE, INTERBEDDED",
+"unit": "Middle Devonian (undifferentiated)",
+"rock": "Sandstone and conglomerate, interbedded",
+"period": "Devonian",
+"color": "#ed7594"
+},
+{
+"id": "DEVONIAN ROCKS (UNDIFFERENTIATED) - HORNBLENDE SCHIST",
+"unit": "Devonian Rocks (undifferentiated)",
+"rock": "Hornblende schist",
+"period": "Devonian",
+"color": "#c9db00"
+},
+{
+"id": "DEVONIAN ROCKS (UNDIFFERENTIATED) - LIMESTONE, MUDSTONE AND CALCAREOUS MUDSTONE",
+"unit": "Devonian Rocks (undifferentiated)",
+"rock": "Limestone, mudstone and calcareous mudstone",
+"period": "Devonian",
+"color": "#75ffff"
+},
+{
+"id": "DEVONIAN ROCKS (UNDIFFERENTIATED) - MICA SCHIST",
+"unit": "Devonian Rocks (undifferentiated)",
+"rock": "Mica schist",
+"period": "Devonian",
+"color": "#75db00"
+},
+{
+"id": "LOWER DEVONIAN ROCKS (UNDIFFERENTIATED) - MUDSTONE, SILTSTONE AND SANDSTONE",
+"unit": "Lower Devonian Rocks (undifferentiated)",
+"rock": "Mudstone, siltstone and sandstone",
+"period": "Devonian",
+"color": "#db75b0"
+},
+{
+"id": "LOWER DEVONIAN ROCKS (UNDIFFERENTIATED) - SANDSTONE AND CONGLOMERATE, INTERBEDDED",
+"unit": "Lower Devonian Rocks (undifferentiated)",
+"rock": "Sandstone and conglomerate, interbedded",
+"period": "Devonian",
+"color": "#ff5400"
+},
+{
+"id": "UNNAMED EXTRUSIVE ROCKS, DEVONIAN - MAFIC LAVA",
+"unit": "Unnamed Extrusive Rocks, Devonian",
+"rock": "Mafic lava",
+"period": "Devonian",
+"color": "#ffdbff"
+},
+{
+"id": "UNNAMED EXTRUSIVE ROCKS, DEVONIAN - MAFIC LAVA AND MAFIC TUFF",
+"unit": "Unnamed Extrusive Rocks, Devonian",
+"rock": "Mafic lava and mafic tuff",
+"period": "Devonian",
+"color": "#ffdbff"
+},
+{
+"id": "UNNAMED EXTRUSIVE ROCKS, DEVONIAN - MAFIC TUFF",
+"unit": "Unnamed Extrusive Rocks, Devonian",
+"rock": "Mafic tuff",
+"period": "Devonian",
+"color": "#ffdbff"
+},
+{
+"id": "UNNAMED IGNEOUS INTRUSION, DEVONIAN - FELSIC-ROCK",
+"unit": "Unnamed Igneous Intrusion, Devonian",
+"rock": "Felsic-rock",
+"period": "Devonian",
+"color": "#ff0000"
+},
+{
+"id": "UNNAMED IGNEOUS INTRUSION, DEVONIAN - MAFIC IGNEOUS-ROCK",
+"unit": "Unnamed Igneous Intrusion, Devonian",
+"rock": "Mafic igneous-rock",
+"period": "Devonian",
+"color": "#75db54"
+},
+{
+"id": "UNNAMED IGNEOUS INTRUSION, DEVONIAN - ULTRAMAFITITE",
+"unit": "Unnamed Igneous Intrusion, Devonian",
+"rock": "Ultramafitite",
+"period": "Devonian",
+"color": "#9433ff"
+},
+{
+"id": "PRIDOLI ROCKS (UNDIFFERENTIATED) - MUDSTONE, SILTSTONE AND SANDSTONE",
+"unit": "Pridoli Rocks (undifferentiated)",
+"rock": "Mudstone, siltstone and sandstone",
+"period": "Silurian",
+"color": "#c954b0"
+},
+{
+"id": "PRIDOLI ROCKS (UNDIFFERENTIATED) - SANDSTONE AND CONGLOMERATE, INTERBEDDED",
+"unit": "Pridoli Rocks (undifferentiated)",
+"rock": "Sandstone and conglomerate, interbedded",
+"period": "Silurian",
+"color": "#ff7533"
+},
+{
+"id": "LUDLOW ROCKS (UNDIFFERENTIATED) - MUDSTONE, SILTSTONE AND SANDSTONE",
+"unit": "Ludlow Rocks (undifferentiated)",
+"rock": "Mudstone, siltstone and sandstone",
+"period": "Silurian",
+"color": "#dbb0ff"
+},
+{
+"id": "RESTON GROUP - CONGLOMERATE AND [SUBEQUAL/SUBORDINATE] SANDSTONE, INTERBEDDED",
+"unit": "Reston Group",
+"rock": "Conglomerate and [subequal/subordinate] sandstone, interbedded",
+"period": "Silurian",
+"color": "#db75b0"
+},
+{
+"id": "UNNAMED IGNEOUS INTRUSION, LATE SILURIAN TO EARLY DEVONIAN - FELSIC-ROCK",
+"unit": "Unnamed Igneous Intrusion, Late Silurian to Early Devonian",
+"rock": "Felsic-rock",
+"period": "Silurian",
+"color": "#ff0000"
+},
+{
+"id": "RICCARTON GROUP - WACKE",
+"unit": "Riccarton Group",
+"rock": "Wacke",
+"period": "Silurian",
+"color": "#c975ff"
+},
+{
+"id": "WENLOCK ROCKS (UNDIFFERENTIATED) - MUDSTONE, SILTSTONE AND SANDSTONE",
+"unit": "Wenlock Rocks (undifferentiated)",
+"rock": "Mudstone, siltstone and sandstone",
+"period": "Silurian",
+"color": "#c975ff"
+},
+{
+"id": "WENLOCK ROCKS (UNDIFFERENTIATED) - SANDSTONE AND CONGLOMERATE, INTERBEDDED",
+"unit": "Wenlock Rocks (undifferentiated)",
+"rock": "Sandstone and conglomerate, interbedded",
+"period": "Silurian",
+"color": "#eddbdb"
+},
+{
+"id": "HAWICK GROUP - WACKE",
+"unit": "Hawick Group",
+"rock": "Wacke",
+"period": "Silurian",
+"color": "#9454ff"
+},
+{
+"id": "LLANDOVERY ROCKS (UNDIFFERENTIATED) - MUDSTONE, SILTSTONE AND SANDSTONE",
+"unit": "Llandovery Rocks (undifferentiated)",
+"rock": "Mudstone, siltstone and sandstone",
+"period": "Silurian",
+"color": "#b094ff"
+},
+{
+"id": "LLANDOVERY ROCKS (UNDIFFERENTIATED) - SANDSTONE AND CONGLOMERATE, INTERBEDDED",
+"unit": "Llandovery Rocks (undifferentiated)",
+"rock": "Sandstone and conglomerate, interbedded",
+"period": "Silurian",
+"color": "#c9b0db"
+},
+{
+"id": "SILURIAN ROCKS (UNDIFFERENTIATED) - LIMESTONE, MUDSTONE AND CALCAREOUS MUDSTONE",
+"unit": "Silurian Rocks (undifferentiated)",
+"rock": "Limestone, mudstone and calcareous mudstone",
+"period": "Silurian",
+"color": "#75ffff"
+},
+{
+"id": "SILURIAN ROCKS (UNDIFFERENTIATED) - MUDSTONE, SILTSTONE AND SANDSTONE",
+"unit": "Silurian Rocks (undifferentiated)",
+"rock": "Mudstone, siltstone and sandstone",
+"period": "Silurian",
+"color": "#b094ff"
+},
+{
+"id": "SILURIAN ROCKS (UNDIFFERENTIATED) - SANDSTONE AND CONGLOMERATE, INTERBEDDED",
+"unit": "Silurian Rocks (undifferentiated)",
+"rock": "Sandstone and conglomerate, interbedded",
+"period": "Silurian",
+"color": "#dbb0ff"
+},
+{
+"id": "UNNAMED EXTRUSIVE ROCKS, SILURIAN - MAFIC LAVA AND MAFIC TUFF",
+"unit": "Unnamed Extrusive Rocks, Silurian",
+"rock": "Mafic lava and mafic tuff",
+"period": "Silurian",
+"color": "#ffdbff"
+},
+{
+"id": "UNNAMED EXTRUSIVE ROCKS, SILURIAN TO DEVONIAN - MAFIC LAVA AND MAFIC TUFF",
+"unit": "Unnamed Extrusive Rocks, Silurian to Devonian",
+"rock": "Mafic lava and mafic tuff",
+"period": "Silurian",
+"color": "#ffdbff"
+},
+{
+"id": "ASHGILL ROCKS (UNDIFFERENTIATED) - MUDSTONE, SILTSTONE AND SANDSTONE",
+"unit": "Ashgill Rocks (undifferentiated)",
+"rock": "Mudstone, siltstone and sandstone",
+"period": "Ordovician",
+"color": "#eddbff"
+},
+{
+"id": "CARADOC ROCKS (UNDIFFERENTIATED) - MUDSTONE, SILTSTONE AND SANDSTONE",
+"unit": "Caradoc Rocks (undifferentiated)",
+"rock": "Mudstone, siltstone and sandstone",
+"period": "Ordovician",
+"color": "#b0dbff"
+},
+{
+"id": "LLANVIRN ROCKS (UNDIFFERENTIATED) - MUDSTONE, SILTSTONE AND SANDSTONE",
+"unit": "Llanvirn Rocks (undifferentiated)",
+"rock": "Mudstone, siltstone and sandstone",
+"period": "Ordovician",
+"color": "#94c9ed"
+},
+{
+"id": "ARENIG ROCKS (UNDIFFERENTIATED) - MUDSTONE, SILTSTONE AND SANDSTONE",
+"unit": "Arenig Rocks (undifferentiated)",
+"rock": "Mudstone, siltstone and sandstone",
+"period": "Ordovician",
+"color": "#75b0db"
+},
+{
+"id": "ORDOVICIAN ROCKS (UNDIFFERENTIATED) - MUDSTONE, SILTSTONE AND SANDSTONE",
+"unit": "Ordovician Rocks (undifferentiated)",
+"rock": "Mudstone, siltstone and sandstone",
+"period": "Ordovician",
+"color": "#75b0db"
+},
+{
+"id": "ORDOVICIAN ROCKS (UNDIFFERENTIATED) - SANDSTONE AND CONGLOMERATE, INTERBEDDED",
+"unit": "Ordovician Rocks (undifferentiated)",
+"rock": "Sandstone and conglomerate, interbedded",
+"period": "Ordovician",
+"color": "#ffdb94"
+},
+{
+"id": "TREMADOC ROCKS (UNDIFFERENTIATED) - MUDSTONE, SILTSTONE AND SANDSTONE",
+"unit": "Tremadoc Rocks (undifferentiated)",
+"rock": "Mudstone, siltstone and sandstone",
+"period": "Ordovician",
+"color": "#3375c9"
+},
+{
+"id": "UNNAMED EXTRUSIVE ROCKS, ORDOVICIAN - FELSIC LAVA",
+"unit": "Unnamed Extrusive Rocks, Ordovician",
+"rock": "Felsic lava",
+"period": "Ordovician",
+"color": "#ffb000"
+},
+{
+"id": "UNNAMED EXTRUSIVE ROCKS, ORDOVICIAN - FELSIC LAVA AND FELSIC TUFF",
+"unit": "Unnamed Extrusive Rocks, Ordovician",
+"rock": "Felsic lava and felsic tuff",
+"period": "Ordovician",
+"color": "#ffb000"
+},
+{
+"id": "UNNAMED EXTRUSIVE ROCKS, ORDOVICIAN - FELSIC TUFF",
+"unit": "Unnamed Extrusive Rocks, Ordovician",
+"rock": "Felsic tuff",
+"period": "Ordovician",
+"color": "#ffb000"
+},
+{
+"id": "UNNAMED EXTRUSIVE ROCKS, ORDOVICIAN - MAFIC LAVA",
+"unit": "Unnamed Extrusive Rocks, Ordovician",
+"rock": "Mafic lava",
+"period": "Ordovician",
+"color": "#ffdbff"
+},
+{
+"id": "UNNAMED EXTRUSIVE ROCKS, ORDOVICIAN - MAFIC LAVA AND MAFIC TUFF",
+"unit": "Unnamed Extrusive Rocks, Ordovician",
+"rock": "Mafic lava and mafic tuff",
+"period": "Ordovician",
+"color": "#ffdbff"
+},
+{
+"id": "UNNAMED EXTRUSIVE ROCKS, ORDOVICIAN - MAFIC TUFF",
+"unit": "Unnamed Extrusive Rocks, Ordovician",
+"rock": "Mafic tuff",
+"period": "Ordovician",
+"color": "#ffdbff"
+},
+{
+"id": "UNNAMED IGNEOUS INTRUSION, ORDOVICIAN TO SILURIAN - FELSIC-ROCK",
+"unit": "Unnamed Igneous Intrusion, Ordovician to Silurian",
+"rock": "Felsic-rock",
+"period": "Ordovician",
+"color": "#ff00b0"
+},
+{
+"id": "UNNAMED IGNEOUS INTRUSION, ORDOVICIAN TO SILURIAN - MAFIC IGNEOUS-ROCK",
+"unit": "Unnamed Igneous Intrusion, Ordovician to Silurian",
+"rock": "Mafic igneous-rock",
+"period": "Ordovician",
+"color": "#75db54"
+},
+{
+"id": "UPPER CAMBRIAN, INCLUDING TREMADOC - MUDSTONE, SILTSTONE AND SANDSTONE",
+"unit": "Upper Cambrian, Including Tremadoc",
+"rock": "Mudstone, siltstone and sandstone",
+"period": "Cambrian",
+"color": "#94edb0"
+},
+{
+"id": "MIDDLE CAMBRIAN - MUDSTONE, SILTSTONE AND SANDSTONE",
+"unit": "Middle Cambrian",
+"rock": "Mudstone, siltstone and sandstone",
+"period": "Cambrian",
+"color": "#75dbb0"
+},
+{
+"id": "LOWER CAMBRIAN ROCKS (UNDIFFERENTIATED) - MUDSTONE, SILTSTONE AND SANDSTONE",
+"unit": "Lower Cambrian Rocks (undifferentiated)",
+"rock": "Mudstone, siltstone and sandstone",
+"period": "Cambrian",
+"color": "#54c9b0"
+},
+{
+"id": "LOWER CAMBRIAN ROCKS (UNDIFFERENTIATED) - SANDSTONE AND CONGLOMERATE, INTERBEDDED",
+"unit": "Lower Cambrian Rocks (undifferentiated)",
+"rock": "Sandstone and conglomerate, interbedded",
+"period": "Cambrian",
+"color": "#c9b0b0"
+},
+{
+"id": "UNNAMED EXTRUSIVE ROCKS, NEOPROTEROZOIC - FELSIC LAVA",
+"unit": "Unnamed Extrusive Rocks, Neoproterozoic",
+"rock": "Felsic lava",
+"period": "Precambrian / unassigned",
+"color": "#ffb000"
+},
+{
+"id": "UNNAMED EXTRUSIVE ROCKS, NEOPROTEROZOIC - FELSIC TUFF",
+"unit": "Unnamed Extrusive Rocks, Neoproterozoic",
+"rock": "Felsic tuff",
+"period": "Precambrian / unassigned",
+"color": "#ffb000"
+},
+{
+"id": "UNNAMED EXTRUSIVE ROCKS, NEOPROTEROZOIC - LAVA AND TUFF",
+"unit": "Unnamed Extrusive Rocks, Neoproterozoic",
+"rock": "Lava and tuff",
+"period": "Precambrian / unassigned",
+"color": "#dbb0b0"
+},
+{
+"id": "UNNAMED EXTRUSIVE ROCKS, NEOPROTEROZOIC - MAFIC LAVA AND MAFIC TUFF",
+"unit": "Unnamed Extrusive Rocks, Neoproterozoic",
+"rock": "Mafic lava and mafic tuff",
+"period": "Precambrian / unassigned",
+"color": "#ffdbff"
+},
+{
+"id": "UNNAMED IGNEOUS INTRUSION, NEOPROTEROZOIC - FELSIC-ROCK",
+"unit": "Unnamed Igneous Intrusion, Neoproterozoic",
+"rock": "Felsic-rock",
+"period": "Precambrian / unassigned",
+"color": "#ff0000"
+},
+{
+"id": "UNNAMED IGNEOUS INTRUSION, NEOPROTEROZOIC - MAFIC IGNEOUS-ROCK",
+"unit": "Unnamed Igneous Intrusion, Neoproterozoic",
+"rock": "Mafic igneous-rock",
+"period": "Precambrian / unassigned",
+"color": "#94ed54"
+},
+{
+"id": "UNNAMED METAMORPHIC ROCKS, NEOPROTEROZOIC - METALIMESTONE",
+"unit": "Unnamed Metamorphic Rocks, Neoproterozoic",
+"rock": "Metalimestone",
+"period": "Precambrian / unassigned",
+"color": "#ed94ed"
+},
+{
+"id": "UNNAMED METASEDIMENTARY ROCKS, NEOPROTEROZOIC - MUDSTONE, SANDSTONE AND CONGLOMERATE",
+"unit": "Unnamed Metasedimentary Rocks, Neoproterozoic",
+"rock": "Mudstone, sandstone and conglomerate",
+"period": "Precambrian / unassigned",
+"color": "#eddbb0"
+}
+]

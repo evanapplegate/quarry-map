@@ -1,0 +1,5 @@
+.DS_Store
+# source data and QGIS project stay local; the site only needs the built files
+*.gpkg
+*.qgz
+data/bsde_*

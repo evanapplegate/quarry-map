@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quarry map</title>
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.css">
+<style>
+  html, body, #map { margin: 0; height: 100%; background: #0b0d0e; }
+  #legend { position: absolute; top: 10px; left: 10px; z-index: 1; box-sizing: border-box; width: 310px; max-width: calc(100% - 20px); max-height: calc(100% - 50px); overflow-y: auto; padding: 4px 12px; background: rgba(29,34,36,0.92); border: 1px solid #444; border-radius: 4px; color: #fff; font: 14px/1.2 Optima, Candara, sans-serif; }
+  #legend details + details { border-top: 1px solid #444; }
+  #legend summary { padding: 8px 0; font-size: 15px; color: #b9c0c3; cursor: pointer; user-select: none; }
+  #legend summary input { vertical-align: -1px; margin: 0 3px 0 4px; }
+  #legend details[open] { padding-bottom: 8px; }
+  #legend label { display: flex; align-items: center; gap: 7px; padding: 3px 0; cursor: pointer; }
+  #legend input { margin: 0; accent-color: #8d979c; }
+  #legend .fam { margin-top: 4px; color: #b9c0c3; }
+  #legend .sub { padding-left: 20px; font-size: 13px; white-space: nowrap; }
+  #legend label i { flex: none; width: 10px; height: 10px; border-radius: 50%; }
+  #legend span { margin-left: auto; padding-left: 16px; color: #8d979c; font-size: 12px; }
+  #legend .slider { cursor: default; padding-bottom: 10px; }
+  #legend .slider input { flex: 1; min-width: 0; }
+  #legend .slider span { margin: 0; padding: 0; width: 30px; text-align: right; }
+  #geo-key h2 { margin: 10px 0 4px; font-size: 11px; font-weight: normal; letter-spacing: 0.08em; text-transform: uppercase; color: #8d979c; }
+  #geo-key h2:first-child { margin-top: 0; }
+  #geo-key .unit { display: flex; gap: 8px; padding: 3px 0; font-size: 13px; }
+  #geo-key .unit i { flex: none; width: 18px; height: 12px; margin-top: 2px; border: 1px solid #555; }
+  #geo-key small { display: block; color: #8d979c; font-size: 11px; }
+  .maplibregl-popup-content { font: 13px/1.35 Optima, Candara, sans-serif; background: #1d2224; color: #fff; border: 1px solid #444; }
+  .maplibregl-popup-content b { font-size: 15px; color: #f5c124; }
+  .maplibregl-popup-anchor-bottom .maplibregl-popup-tip { border-top-color: #444; }
+  .maplibregl-popup-anchor-top .maplibregl-popup-tip { border-bottom-color: #444; }
+  .maplibregl-popup-anchor-left .maplibregl-popup-tip { border-right-color: #444; }
+  .maplibregl-popup-anchor-right .maplibregl-popup-tip { border-left-color: #444; }
+  .maplibregl-popup-close-button { color: #aaa; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<div id="legend"></div>
+<script src="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js"></script>
+<script type="module">
+import TinySDF from 'https://cdn.jsdelivr.net/npm/@mapbox/tiny-sdf@2.0.6/+esm';
+
+// Glyphs are rendered in the browser from the local Optima font and served to
+// MapLibre as SDF glyph PBFs through a custom protocol, so no font files are needed.
+const FONT_FAMILY = 'Optima, Candara, "Gill Sans", sans-serif';
+const sdfs = {};
+function sdfFor(fontstack) {
+  return sdfs[fontstack] ??= new TinySDF({
+    fontSize: 24, buffer: 3, radius: 8, cutoff: 0.25,
+    fontFamily: FONT_FAMILY,
+    fontWeight: /bold/i.test(fontstack) ? '700' : '400',
+    fontStyle: /italic/i.test(fontstack) ? 'italic' : 'normal'
+  });
+}
+
+// minimal protobuf writer for the glyphs.proto schema
+function varint(n, out) { n >>>= 0; while (n > 127) { out.push((n & 127) | 128); n >>>= 7; } out.push(n); }
+const zigzag = n => (n << 1) ^ (n >> 31);
+function field(num, type, out) { varint((num << 3) | type, out); }
+function bytes(num, arr, out) { field(num, 2, out); varint(arr.length, out); for (const b of arr) out.push(b); }
+
+function glyphRange(fontstack, start, end) {
+  const sdf = sdfFor(fontstack);
+  const stack = [];
+  bytes(1, new TextEncoder().encode(fontstack), stack);
+  bytes(2, new TextEncoder().encode(`${start}-${end}`), stack);
+  for (let id = Math.max(start, 32); id <= end; id++) {
+    if (id >= 127 && id < 160) continue;
+    const g = sdf.draw(String.fromCodePoint(id));
+    const glyph = [];
+    field(1, 0, glyph); varint(id, glyph);
+    bytes(2, g.data, glyph);
+    field(3, 0, glyph); varint(g.glyphWidth, glyph);
+    field(4, 0, glyph); varint(g.glyphHeight, glyph);
+    field(5, 0, glyph); varint(zigzag(Math.round(g.glyphLeft)), glyph);
+    field(6, 0, glyph); varint(zigzag(Math.round(g.glyphTop - 27)), glyph);
+    field(7, 0, glyph); varint(Math.round(g.glyphAdvance), glyph);
+    bytes(3, glyph, stack);
+  }
+  const out = [];
+  bytes(1, stack, out);
+  return new Uint8Array(out).buffer;
+}
+
+maplibregl.addProtocol('optima', async ({ url }) => {
+  const [, stack, start, end] = url.match(/^optima:\/\/(.+)\/(\d+)-(\d+)\.pbf/);
+  return { data: glyphRange(decodeURIComponent(stack), +start, +end) };
+});
+
+// DEM tiles (terrarium) with below-sea-level elevations clamped to 0, so the
+// hillshade and terrain mesh ignore bathymetry and the sea stays flat.
+maplibregl.addProtocol('dem0', async ({ url }, abort) => {
+  const res = await fetch(url.replace('dem0://', 'https://'), { signal: abort.signal });
+  if (!res.ok) throw new Error(`DEM tile ${res.status}`);
+  const bmp = await createImageBitmap(await res.blob(), { colorSpaceConversion: 'none', premultiplyAlpha: 'none' });
+  const canvas = new OffscreenCanvas(bmp.width, bmp.height);
+  const ctx = canvas.getContext('2d', { willReadFrequently: true });
+  ctx.drawImage(bmp, 0, 0);
+  const img = ctx.getImageData(0, 0, bmp.width, bmp.height);
+  const d = img.data;
+  for (let i = 0; i < d.length; i += 4) {
+    if (d[i] < 128) { d[i] = 128; d[i + 1] = 0; d[i + 2] = 0; } // elevation = R*256 + G + B/256 - 32768
+  }
+  ctx.putImageData(img, 0, 0);
+  return { data: await (await canvas.convertToBlob({ type: 'image/png' })).arrayBuffer() };
+});
+
+const STATUSES = [ // draw and label priority: first wins
+  { id: 'Active', on: true },
+  { id: 'Inactive', on: false },
+  { id: 'Dormant', on: false },
+  { id: 'Historic', on: false },
+  { id: 'Other', on: false },
+  { id: 'Ceased', on: false }
+];
+// rock classes for active quarries, keyword-classified from BSDE stone names (scripts/build_quarries.py)
+const ROCKS = [
+  { family: 'Sandstone', classes: [
+    { id: 'Millstone Grit', color: '#f5b324' },
+    { id: 'Coal Measures sandstone', color: '#ee8a3a' },
+    { id: 'Other Carboniferous sandstone', color: '#cfae7c' },
+    { id: 'Permo-Triassic sandstone', color: '#e5533d' },
+    { id: 'Old Red & Devonian sandstone', color: '#c4806b' },
+    { id: 'Jurassic & Cretaceous sandstone', color: '#f7e27a' },
+    { id: 'Lower Palaeozoic sandstone', color: '#a39a6d' }
+  ] },
+  { family: 'Limestone', classes: [
+    { id: 'Carboniferous limestone', color: '#3d8fe0' },
+    { id: 'Magnesian limestone', color: '#8a93f7' },
+    { id: 'Jurassic oolitic limestone', color: '#5ec8f2' },
+    { id: 'Portland & Purbeck', color: '#c2efff' },
+    { id: 'Lias limestone', color: '#2fb5a0' },
+    { id: 'Chalk', color: '#a5e887' }
+  ] },
+  { family: 'Igneous', classes: [
+    { id: 'Granite', color: '#ff8fc0' },
+    { id: 'Volcanic & dolerite', color: '#e05ce0' }
+  ] },
+  { family: 'Slate & other', classes: [
+    { id: 'Slate & phyllite', color: '#b59cf5' },
+    { id: 'Flint, chert & sarsen', color: '#f2f2f2' },
+    { id: 'Ironstone & carstone', color: '#a8b545' }
+  ] }
+];
+const ROCK_CLASSES = ROCKS.flatMap(f => f.classes);
+const INACTIVE_COLOR = '#8d979c'; // every non-active status
+const rank = ['match', ['get', 'status'], ...STATUSES.flatMap((s, i) => [s.id, i]), 9];
+
+const map = new maplibregl.Map({
+  container: 'map',
+  style: 'basemap_style.json',
+  bounds: [[-8.3, 48.7], [1.9, 57.7]], // frames whole UK once pitched (pitch shifts the view north)
+  pitch: 35,
+  maxPitch: 75,
+  hash: true,
+  attributionControl: false
+});
+window.map = map; // for console debugging
+// credits collapsed to the (i) button on load
+map.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-right');
+// (MapLibre opens it once the first attribution arrives, so close it right then)
+const collapseCredits = () => {
+  const credits = document.querySelector('.maplibregl-ctrl-attrib.maplibregl-compact-show');
+  if (!credits) return;
+  credits.classList.remove('maplibregl-compact-show');
+  credits.removeAttribute('open');
+  map.off('sourcedata', collapseCredits);
+};
+map.on('sourcedata', collapseCredits);
+map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'top-right');
+map.addControl(new maplibregl.TerrainControl({ source: 'dem-terrain', exaggeration: 2 }), 'top-right');
+
+map.on('load', async () => {
+  const data = await (await fetch('data/quarries.geojson')).json();
+  map.addSource('quarries', { type: 'geojson', data });
+
+  // BGS 625k bedrock (England), colours baked in from the QGIS categorised style
+  map.addSource('bedrock', {
+    type: 'vector',
+    tiles: [new URL('.', location.href).href + 'data/bedrock_tiles/{z}/{x}/{y}.pbf'],
+    bounds: [-6.36, 49.9, 1.77, 55.81],
+    maxzoom: 10,
+    attribution: 'Geology: BGS 1:625k © UKRI'
+  });
+  map.addLayer({
+    id: 'bedrock',
+    type: 'fill',
+    source: 'bedrock',
+    'source-layer': 'bedrock',
+    // no transition: terrain caches draped tiles, so a fading opacity would stick at its first frame
+    paint: { 'fill-color': ['get', 'color'], 'fill-opacity': 0.45, 'fill-opacity-transition': { duration: 0 }, 'fill-antialias': false }
+  }, 'hillshade');
+
+  map.addLayer({
+    id: 'quarries',
+    type: 'circle',
+    source: 'quarries',
+    layout: { 'circle-sort-key': ['-', 0, rank] },
+    paint: {
+      'circle-color': ['case', ['!=', ['get', 'status'], 'Active'], INACTIVE_COLOR,
+        ['match', ['get', 'rock'], ...ROCK_CLASSES.flatMap(r => [r.id, r.color]), '#fff']],
+      'circle-radius': ['interpolate', ['linear'], ['zoom'], 5, 2, 10, 4, 14, 6],
+      'circle-opacity': ['match', ['get', 'status'], 'Active', 1, 0.75],
+      'circle-stroke-color': '#1d2224',
+      'circle-stroke-width': ['interpolate', ['linear'], ['zoom'], 5, 0.5, 10, 1.2]
+    }
+  });
+
+  map.addLayer({
+    id: 'quarry-labels',
+    type: 'symbol',
+    source: 'quarries',
+    layout: {
+      'text-field': ['get', 'PIT_NAME'],
+      'text-font': ['Optima Regular'],
+      'text-size': ['interpolate', ['linear'], ['zoom'], 5, 10, 10, 13, 14, 16],
+      'text-variable-anchor': ['top-right', 'top-left', 'bottom-right', 'bottom-left', 'right', 'left'],
+      'text-radial-offset': 0.45,
+      'text-justify': 'auto',
+      'text-max-width': 9,
+      'text-padding': 1,
+      'symbol-sort-key': rank
+    },
+    paint: {
+      'text-color': ['match', ['get', 'status'], 'Active', '#ffffff', '#b9c0c3'],
+      'text-halo-color': 'rgba(29,34,36,0.85)',
+      'text-halo-width': 1.2
+    }
+  });
+
+  // legend: status and rock type tick boxes, both filter the dots
+  const legend = document.getElementById('legend');
+  const section = (title, open) => {
+    const d = document.createElement('details');
+    d.open = open;
+    d.innerHTML = `<summary>${title}</summary>`;
+    legend.append(d);
+    return d;
+  };
+  const statusBox = section('Quarry status', true);
+  for (const s of STATUSES) {
+    statusBox.insertAdjacentHTML('beforeend',
+      `<label><input type="checkbox" name="status" value="${s.id}"${s.on ? ' checked' : ''}>${s.id}<span></span></label>`);
+  }
+  const rockBox = section('Rock type, active quarries', true);
+  for (const f of ROCKS) {
+    rockBox.insertAdjacentHTML('beforeend',
+      `<label class="fam"><input type="checkbox" data-family="${f.family}" checked>${f.family}<span></span></label>` +
+      f.classes.map(r => `<label class="sub"><input type="checkbox" name="rock" value="${r.id}" data-in="${f.family}" checked>` +
+        `<i style="background:${r.color}"></i>${r.id}<span></span></label>`).join(''));
+  }
+  const checked = name => [...legend.querySelectorAll(`input[name=${name}]:checked`)].map(i => i.value);
+  const applyFilter = () => {
+    const statuses = checked('status'), rocks = checked('rock');
+    // rock ticks only apply to active quarries
+    const filter = ['all', ['in', ['get', 'status'], ['literal', statuses]],
+      ['any', ['!=', ['get', 'status'], 'Active'], ['in', ['get', 'rock'], ['literal', rocks]]]];
+    map.setFilter('quarries', filter);
+    map.setFilter('quarry-labels', filter);
+    // counts: status totals, and active quarries per rock class and family
+    const n = {};
+    for (const { properties: p } of data.features) {
+      n[p.status] = (n[p.status] || 0) + 1;
+      if (p.status === 'Active') n[p.rock] = (n[p.rock] || 0) + 1;
+    }
+    for (const i of legend.querySelectorAll('input[name]')) i.parentNode.querySelector('span').textContent = (n[i.value] || 0).toLocaleString();
+    for (const fam of legend.querySelectorAll('input[data-family]')) {
+      const kids = [...legend.querySelectorAll(`input[data-in="${fam.dataset.family}"]`)];
+      const on = kids.filter(k => k.checked).length;
+      fam.checked = on === kids.length;
+      fam.indeterminate = on > 0 && on < kids.length;
+      fam.parentNode.querySelector('span').textContent = kids.reduce((s, k) => s + (n[k.value] || 0), 0);
+    }
+  };
+  legend.addEventListener('change', e => {
+    const fam = e.target.dataset.family;
+    if (fam) for (const k of legend.querySelectorAll(`input[data-in="${fam}"]`)) k.checked = e.target.checked;
+    if (fam || e.target.name) applyFilter();
+  });
+  applyFilter();
+
+  // bedrock: layer toggle plus a key of the units currently in view
+  const key = await (await fetch('data/bedrock_key.json')).json();
+  const geoBox = section('<input type="checkbox" id="geo-on" checked> Bedrock geology', false);
+  geoBox.insertAdjacentHTML('beforeend',
+    '<label class="slider">Opacity<input type="range" id="geo-opacity" min="0" max="100" value="45"><span>45%</span></label><div id="geo-key"></div>');
+  geoBox.querySelector('#geo-opacity').addEventListener('input', e => {
+    map.setPaintProperty('bedrock', 'fill-opacity', e.target.value / 100);
+    e.target.nextSibling.textContent = `${e.target.value}%`;
+    geoKey.style.setProperty('--mix', `${e.target.value}%`); // key swatches follow the layer
+  });
+  const geoKey = geoBox.querySelector('#geo-key');
+  const geoOn = geoBox.querySelector('#geo-on');
+  const updateKey = () => {
+    if (!geoBox.open) return;
+    const seen = new Set(geoOn.checked ? map.queryRenderedFeatures({ layers: ['bedrock'] }).map(f => f.properties.unit) : []);
+    let html = '', period;
+    for (const k of key) {
+      if (!seen.has(k.id)) continue;
+      if (k.period !== period) html += `<h2>${period = k.period}</h2>`;
+      html += `<div class="unit" title="${k.rock}"><i style="background:color-mix(in srgb, ${k.color} var(--mix, 45%), #3a3b3b)"></i><div>${k.unit}<small>${k.rock}</small></div></div>`;
+    }
+    geoKey.innerHTML = html || `<small>${geoOn.checked ? 'No bedrock units in view' : 'Layer is off'}</small>`;
+  };
+  geoOn.addEventListener('change', () => {
+    map.setLayoutProperty('bedrock', 'visibility', geoOn.checked ? 'visible' : 'none');
+    map.once('idle', updateKey);
+  });
+  geoBox.addEventListener('toggle', updateKey);
+  map.on('idle', updateKey);
+
+  const esc = s => String(s).replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+  map.on('click', 'quarries', e => {
+    const p = e.features[0].properties;
+    const rows = [p.status_detail || p.status, p.rock, p.STONE_NAMES, p.ALTERNATIVE_NAME ? `aka ${p.ALTERNATIVE_NAME}` : '', p.MPA_NAME]
+      .filter(Boolean).map(esc).join('<br>');
+    new maplibregl.Popup({ offset: 8 }).setLngLat(e.features[0].geometry.coordinates)
+      .setHTML(`<b>${esc(p.PIT_NAME)}</b><br>${rows}`).addTo(map);
+  });
+  map.on('click', e => {
+    if (map.queryRenderedFeatures(e.point, { layers: ['quarries'] }).length) return;
+    const f = map.queryRenderedFeatures(e.point, { layers: ['bedrock'] })[0];
+    if (!f) return;
+    const k = key.find(k => k.id === f.properties.unit); // key has the cased names, tiles are all caps
+    if (!k) return;
+    new maplibregl.Popup({ offset: 4 }).setLngLat(e.lngLat)
+      .setHTML(`<b style="color:#fff">${esc(k.unit)}</b><br>${esc(k.rock)}<br>${esc(k.period)}`).addTo(map);
+  });
+  map.on('mouseenter', 'quarries', () => map.getCanvas().style.cursor = 'pointer');
+  map.on('mouseleave', 'quarries', () => map.getCanvas().style.cursor = '');
+});
+</script>
+</body>
+</html>
