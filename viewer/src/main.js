@@ -18,8 +18,8 @@ const BACK_RAKE = 0.5;      // low raking wall glow on the backers, so the engra
 const ZOOM_OUT = 1.62;      // zoom-out cap as a multiple of the distance that frames both lightboxes
 // each lightbox hangs centred on its own raised panel, either side of the centre stile
 const HANGS = [
-  { paper: PAPER.A1, x: -WALL.bay / 2, logoW: 0.085 },
-  { paper: PAPER.A2, x: WALL.bay / 2, logoW: 0.07 },
+  { paper: PAPER.A1, label: 'A1', x: -WALL.bay / 2, logoW: 0.085 },
+  { paper: PAPER.A2, label: 'A2', x: WALL.bay / 2, logoW: 0.07 },
 ];
 
 const state = {
@@ -112,7 +112,7 @@ function hangLightboxes(landscape) {
   boxes = HANGS.map((hang, i) => {
     const paper = landscape ? [hang.paper[1], hang.paper[0]] : hang.paper;
     const box = createLightbox({
-      paper, x: hang.x, y: FRAME_CY, z0: FRAME_Z0, walnut, backerMat: mdf, room, lightColor, seed: i * 1.7,
+      paper, label: hang.label, x: hang.x, y: FRAME_CY, z0: FRAME_Z0, walnut, backerMat: mdf, room, lightColor, seed: i * 1.7,
     });
     box.logoW = hang.logoW;
     scene.add(box.group);
@@ -133,7 +133,9 @@ function hangLightboxes(landscape) {
 }
 
 // open on a view that takes in both frames
+let homed = false; // true once the view has been placed at a real window size
 function homeView() {
+  homed = viewW > 0 && viewH > 0;
   fitZoom();
   controls.target.set((hangMin.x + hangMax.x) / 2, FRAME_CY, 0.04);
   camera.position.copy(controls.target).addScaledVector(new THREE.Vector3(0.16, 0.04, 1).normalize(), controls.maxDistance / ZOOM_OUT);
@@ -186,7 +188,6 @@ document.querySelectorAll('[data-style]').forEach((b) => b.addEventListener('cli
 // ---------- resize ----------
 let viewW = window.innerWidth, viewH = window.innerHeight;
 function fitView() {
-  const wasHidden = !viewW || !viewH;
   viewW = window.innerWidth; viewH = window.innerHeight;
   if (!viewW || !viewH) return;
   camera.aspect = viewW / viewH;
@@ -195,7 +196,7 @@ function fitView() {
   composer.setSize(viewW, viewH);
   fitZoom();
   // a page opened in a background tab lays out at 0 x 0; place the camera once it has a real size
-  if (boxes.length && (wasHidden || !Number.isFinite(camera.position.x))) homeView();
+  if (boxes.length && (!homed || !Number.isFinite(camera.position.x))) homeView();
 }
 window.addEventListener('resize', fitView);
 

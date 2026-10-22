@@ -2,7 +2,7 @@
 // lights it throws. The glass (visible map) is exactly the paper size; the
 // frame grows outward from it.
 import * as THREE from 'three';
-import { buildFrame, MAP_Z } from './frame.js';
+import { buildFrame } from './frame.js';
 import { engravingMaterial } from './engraving.js';
 import { TEX_M } from './profile.js';
 import { buildCord } from './cord.js';
@@ -58,6 +58,29 @@ function contactShadow(outerW, outerH) {
   );
 }
 
+// Small paper-size label painted on the wall above the frame, in the lamp colour
+// at half opacity. Drawn once the UI font is available so it matches the panel.
+async function wallLabel(text) {
+  const font = '500 150px Optima, "EB Garamond", Georgia, serif';
+  try { await document.fonts.load(font, text); } catch { /* draw with whatever is available */ }
+  const cv = document.createElement('canvas');
+  cv.width = 512; cv.height = 256;
+  const g = cv.getContext('2d');
+  g.font = font;
+  g.textAlign = 'center';
+  g.textBaseline = 'middle';
+  g.fillStyle = '#fff';
+  g.fillText(text, cv.width / 2, cv.height / 2 + 8);
+  const tex = new THREE.CanvasTexture(cv);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  tex.anisotropy = 8;
+  const h = 0.05; // text cap height comes out near 20 mm
+  return new THREE.Mesh(
+    new THREE.PlaneGeometry(h * 2, h),
+    new THREE.MeshBasicMaterial({ map: tex, transparent: true, opacity: 0.5, depthWrite: false })
+  );
+}
+
 function backerUv(geo, du, dv) {
   // world-scaled UVs for the board's texture; uv1 keeps the plane's own 0..1 UVs for the engraving
   const pos = geo.attributes.position;
@@ -70,14 +93,14 @@ function backerUv(geo, du, dv) {
   geo.setAttribute('uv', new THREE.BufferAttribute(out, 2));
 }
 
-export function createLightbox({ paper, x, y, z0, walnut, backerMat, room, lightColor, seed = 0 }) {
+export function createLightbox({ paper, x, y, z0, walnut, backerMat, room, lightColor, label, seed = 0 }) {
   const [w, h] = paper;
   const area = (w * h) / A1_AREA;
   const group = new THREE.Group();
   group.position.set(x, y, z0);
 
   const rect = new THREE.RectAreaLight(lightColor, 1, w, h);
-  rect.position.set(0, 0, MAP_Z + 0.0005);
+  rect.position.set(0, 0, 0.035);
   rect.lookAt(0, 0, 10);
   group.add(rect);
 
@@ -93,11 +116,23 @@ export function createLightbox({ paper, x, y, z0, walnut, backerMat, room, light
   group.add(backFill);
 
   const mapGroup = new THREE.Group();
-  mapGroup.position.z = MAP_Z;
+  mapGroup.position.z = 0.035; // set per frame style in setStyle
   mapGroup.add(new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: 0x0c0703 })));
   group.add(mapGroup);
 
-  let frameMesh, ao, cord;
+  let frameMesh, ao, cord, labelMesh;
+  const placeLabel = () => {
+    // centred 35 mm above the frame's top edge, on the wall field
+    if (labelMesh && frameMesh) labelMesh.position.set(0, h / 2 + frameMesh.userData.width + 0.035, -z0 + 0.0008);
+  };
+  if (label) {
+    wallLabel(label).then((m) => {
+      labelMesh = m;
+      labelMesh.material.color.copy(lightColor);
+      placeLabel();
+      group.add(labelMesh);
+    });
+  }
   const plugH = 0.056;
   const plug = { x: SOCKET.x + Math.sign(x - SOCKET.x) * SOCKET.plugDx, y: SOCKET.y - 0.008, z: SOCKET.face + 0.013, h: plugH };
 
@@ -110,6 +145,10 @@ export function createLightbox({ paper, x, y, z0, walnut, backerMat, room, light
       frameMesh = buildFrame(style, w, h, walnut);
       group.add(frameMesh);
       const fw = frameMesh.userData.width;
+      // the map (and the light it gives) sits at the depth this profile sets
+      mapGroup.position.z = frameMesh.userData.mapZ;
+      placeLabel();
+      rect.position.z = frameMesh.userData.mapZ + 0.0005;
       if (ao) { room.remove(ao); ao.geometry.dispose(); ao.material.alphaMap.dispose(); }
       ao = contactShadow(w + 2 * fw, h + 2 * fw);
       ao.position.set(x, y, 0.0006);
@@ -157,6 +196,7 @@ export function createLightbox({ paper, x, y, z0, walnut, backerMat, room, light
     },
 
     applyLight(intensity) {
+      if (labelMesh) labelMesh.material.color.copy(lightColor);
       rect.color.copy(lightColor);
       rect.intensity = LIGHT.RECT_GAIN * intensity;
       bounce.color.copy(lightColor);

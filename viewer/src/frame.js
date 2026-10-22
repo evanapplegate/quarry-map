@@ -1,19 +1,18 @@
-// Walnut frame styles. Both share the sight opening and map depth so the map,
-// backer and light stay put when the style changes.
+// Walnut frame styles. Both share the sight opening, so the backer stays put
+// when the style changes; each sets its own map depth (userData.mapZ).
 import * as THREE from 'three';
 import { arc, buildMitredFrame, smoothstep } from './profile.js';
 
-export const MAP_Z = 0.035; // map surface height above the frame back
-
-// Plain walnut: deep box section, flat face, chamfered sight edge.
+// Plain walnut: deep box section, flat face, square sight edge; the map sits
+// 10 mm below the face.
 function plainProfile() {
-  const W = 0.058, D = 0.06, ch = 0.011, r = 0.0018;
+  const W = 0.058, D = 0.06, r = 0.0018;
   return {
     width: W,
+    mapZ: D - 0.01,
     polylines: [
-      { pts: [[0, 0], [0, D - ch]] },                       // inner reveal above the map
-      { pts: [[0, D - ch], [ch, D]] },                      // sight chamfer
-      { pts: [[ch, D], [W - r, D]] },                       // face
+      { pts: [[0, 0], [0, D]] },                            // straight inner reveal down to the map
+      { pts: [[0, D], [W - r, D]] },                        // face
       { pts: arc(W - r, D - r, r, 90, 0, 6) },              // eased outer arris
       { pts: [[W, D - r], [W, 0]] },                        // outer side
       { pts: [[W, 0], [0, 0]] },                            // back
@@ -77,6 +76,7 @@ function moldingProfile() {
   }
   return {
     width: W,
+    mapZ: 0.035, // 11 mm below the lip fillet
     polylines: [
       { pts: [[0, 0], [0, 0.046]] },                          // inner reveal
       { pts: [[0, 0.046], [0.005, 0.046]] },                  // lip fillet
@@ -116,5 +116,6 @@ export function buildFrame(style, sightW, sightH, material) {
   });
   const mesh = new THREE.Mesh(geo, material);
   mesh.userData.width = prof.width;
+  mesh.userData.mapZ = prof.mapZ;
   return mesh;
 }
